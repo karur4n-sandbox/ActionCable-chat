@@ -1,0 +1,11 @@
+%h1 Rooms#show
+%ul{data: {channel: 'comments', room_id: @room.id}}
+  - if @comments.empty?
+    コメントはありません
+  - else
+    - @comments.each do |comment|
+      %li= comment.body
+= form_for [@room, Comment.new], remote: true, html: {class: 'form-inline'} do |form|
+  .form-group
+    = form.text_field :body, class: 'form-control'
+    = form.submit '送信する', class: 'btn btn-primary'
